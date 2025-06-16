@@ -1,0 +1,62 @@
+import requests  # Add this at the top of your file
+
+print("English,Norsk,Deutsch")
+language = input("Choose language: ")
+if language == "Norsk":
+    print("Ved bruk av denne tjenesten, så godtar du vilkår og betingelser. Ved å finne ut av vilkår og betingelser for denne tjenesten, her er en lenke til dem:https://github.com/fawazahmed0/exchange-api/blob/main/LICENSE Godtar du vilkår og betingelser? (ja/nei)")
+    if input().lower() == "ja":
+        print("Velkommen til valutakonvertereren!")
+        from_currency = input("hvilken valuta har du? (USD, EUR, NOK,DKK): ")
+        to_currency = input("Hvilken valuta vil du ha? (USD, EUR, NOK, DKK): ")
+        amount = float(input("Hvor mye penger har du? "))
+        
+        # Get exchange rates from API
+        API = f"https://latest.currency-api.pages.dev/v1/currencies/{from_currency.lower()}.json"
+        response = requests.get(API)
+        rates = response.json()
+        
+        # Calculate and print the converted amount
+        converted_amount = amount * rates[from_currency.lower()][to_currency.lower()]
+        print(f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}")
+    if input().lower() == "nei":
+        print("Du har ikke godtatt vilkår og betingelser. Programmet avsluttes.")
+elif language == "English":
+    print("By using this service, you agree to the terms and conditions. By finding out the terms and conditions for this service, here is a link to them:https://github.com/fawazahmed0/exchange-api/blob/main/LICENSE Do you accept the terms and conditions? (yes/no)")
+    if input().lower() == "yes":
+        print("Welcome to the currency converter!")
+        from_currency = input("What currency do you have? (USD, EUR, NOK, DKK): ")
+        to_currency = input("What currency do you want? (USD, EUR, NOK, DKK): ")
+        amount = float(input("How much money do you have? "))
+        
+        # Get exchange rates from API
+        API = f"https://latest.currency-api.pages.dev/v1/currencies/{from_currency.lower()}.json"
+        response = requests.get(API)
+        rates = response.json()
+        
+        # Calculate and print the converted amount
+        converted_amount = amount * rates[from_currency.lower()][to_currency.lower()]
+        print(f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}")
+    else:
+        print("You have not accepted the terms and conditions. Exiting the program.")
+if language == "Deutsch":
+    print("Durch die Nutzung dieses Dienstes akzeptieren Sie die Allgemeinen Geschäftsbedingungen. Hier ist ein Link zu den AGB:https://github.com/fawazahmed0/exchange-api/blob/main/LICENSE Akzeptieren Sie die AGB? (ja/nein)")
+    if input().lower() == "ja":
+        print("Willkommen beim Währungsumrechner!")
+        from_currency = input("Welche Währung haben Sie? (USD, EUR, NOK, DKK): ")
+        to_currency = input("Welche Währung möchten Sie? (USD, EUR, NOK, DKK): ")
+        amount = float(input("Wie viel Geld haben Sie? "))
+        
+        # Get exchange rates from API
+        API = f"https://latest.currency-api.pages.dev/v1/currencies/{from_currency.lower()}.json"
+        response = requests.get(API)
+        rates = response.json()
+        
+        # Calculate and print the converted amount
+        converted_amount = amount * rates[from_currency.lower()][to_currency.lower()]
+        print(f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}")
+    else:
+        if input().lower() == "nein":
+            print("Sie haben die Allgemeinen Geschäftsbedingungen nicht akzeptiert. Das Programm wird beendet.")
+else:
+    print("Invalid language selected. Please choose either 'Norsk', 'English', or 'Deutsch'.")
+          
